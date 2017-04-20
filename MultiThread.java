@@ -26,20 +26,21 @@ public class MultiThread {
         long start = System.currentTimeMillis();
         
         // Posso creare un THREAD e avviarlo immediatamente
-        new Thread (new TicTac("TIC")).start();
+        Thread tic = new Thread (new TicTac("TIC"));
+        tic.start();
         
         // Posso creare un 2ndo THREAD e farlo iniziare qualche tempo dopo...
-        Thread t = new Thread(new TicTac("TAC"));
+        Thread tac = new Thread(new TicTac("TAC"));
         
         try {
             TimeUnit.MILLISECONDS.sleep(1111);
-            t.start();  // avvio del secondo THREAD
+            tac.start();  // avvio del secondo THREAD
         } catch (InterruptedException e) {}
         
         try {
             TimeUnit.MILLISECONDS.sleep(1234);
         } catch (InterruptedException e) {}
-        t.interrupt(); // stop 2nd THREAD
+        tac.interrupt(); // stop 2nd THREAD
 
         
         long end = System.currentTimeMillis();
@@ -58,14 +59,14 @@ class TicTac implements Runnable {
     private static int contatore = 0;
     // non essesndo "static" c'e' una copia delle seguenti variabili per ogni THREAD 
     private int id;
-    private String tic = "TIC";
+    private String t;
     
     @Override // Annotazione per il compilatore
     // se facessimo un overloading invece di un override il copilatore ci segnalerebbe l'errore
     // per approfondimenti http://lancill.blogspot.it/2012/11/annotations-override.html
     public void run() {
         for (int i = 10; i > 0; i--) {
-            System.out.println("<" + id + "> " + tic + ": " + i);
+            System.out.println("<" + id + "> " + t + ": " + i);
             
             try {
                 TimeUnit.MILLISECONDS.sleep(400);
@@ -80,6 +81,6 @@ class TicTac implements Runnable {
     // Costruttore, possiamo usare il costruttore per passare dei parametri al THREAD
     public TicTac (String s) {
         this.id = ++contatore;
-        this.tic = s;
+        this.t = s;
     }
 }
