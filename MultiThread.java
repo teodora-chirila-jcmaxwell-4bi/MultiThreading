@@ -55,32 +55,33 @@ public class MultiThread {
 // +1 si puo' controllare quando un THREAD inizia indipendentemente da quando e' stato creato
 class TicTac implements Runnable {
     
-    // contatore essendo "static" diventa comune a tutte le "Threads" (solo una variabile comune a tutti gli oggetti TicTac)
-    private static int contatore = 0;
     // non essesndo "static" c'e' una copia delle seguenti variabili per ogni THREAD 
-    private int id;
     private String t;
+    private String msg;
+
+    // Costruttore, possiamo usare il costruttore per passare dei parametri al THREAD
+    public TicTac (String s) {
+        this.t = s;
+    }
     
     @Override // Annotazione per il compilatore
     // se facessimo un overloading invece di un override il copilatore ci segnalerebbe l'errore
     // per approfondimenti http://lancill.blogspot.it/2012/11/annotations-override.html
     public void run() {
         for (int i = 10; i > 0; i--) {
-            System.out.println("<" + id + "> " + t + ": " + i);
+            msg = "<" + t + "> ";
+            //System.out.print(msg);
             
             try {
                 TimeUnit.MILLISECONDS.sleep(400);
             } catch (InterruptedException e) {
-                System.out.println("THREAD " + id + " e' stata interrotta! bye bye...");
+                System.out.println("THREAD " + t + " e' stata interrotta! bye bye...");
                 return; //me ne vado = termino il THREAD
             }
+            msg += t + ": " + i;
+            System.out.println(msg);
          
         }
     }
     
-    // Costruttore, possiamo usare il costruttore per passare dei parametri al THREAD
-    public TicTac (String s) {
-        this.id = ++contatore;
-        this.t = s;
-    }
 }
