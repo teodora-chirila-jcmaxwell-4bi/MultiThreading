@@ -16,4 +16,6 @@ Ognuno degli studenti deve:
 7. Verificare (testare) il codice che si e' modificato.
 8. Quando il codice funziona correttamente fare un MERGE (fusione) del Branch "Esercizio 1" con il Branch "master"
 
+NOTA: Il testo dell'Esercizio 1 si trova nella WIKI di questo progetto.
+
 # Buon Lavoro!
