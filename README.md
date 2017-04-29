@@ -17,38 +17,70 @@ Quindi se in nome contenente nella variabile attuale è "TAC" e il nome contenut
 ## IL RISULTATO SARA' IL SEGUENTE SE IL CODICE E' CORRETTO: 
 (per vedere il corretto funzionamento basta contare quante volte toe capita dopo tac e vedere se combacia con il risultato della variabile del punteggio, come nelle immagini seguenti //parti in grassetto)
 
-Main Thread iniziata...                                                           
-#<TAC> TAC: 10
-#<TOE> TOE: 10
+Main Thread iniziata...    
+
+# <TAC> TAC: 10
+
+# <TOE> TOE: 10
+
 <TIC> TIC: 10
-#<TAC> TAC: 9
-#<TOE> TOE: 9
-#<TAC> TAC: 8
-#<TOE> TOE: 8
+
+# <TAC> TAC: 9
+
+# <TOE> TOE: 9
+
+# <TAC> TAC: 8
+
+# <TOE> TOE: 8
+
 <TIC> TIC: 9
-#<TAC> TAC: 7
-#<TOE> TOE: 7
-#<TAC> TAC: 6
-#<TOE> TOE: 6
+
+# <TAC> TAC: 7
+
+# <TOE> TOE: 7
+
+# <TAC> TAC: 6
+
+# <TOE> TOE: 6
+
 <TIC> TIC: 8
-#<TAC> TAC: 5
-#<TOE> TOE: 5
-#<TAC> TAC: 4
-#<TOE> TOE: 4
+
+# <TAC> TAC: 5
+
+# <TOE> TOE: 5
+
+# <TAC> TAC: 4
+
+# <TOE> TOE: 4
+
 <TIC> TIC: 7
+
 <TAC> TAC: 3
-#<TAC> TAC: 2
-#<TOE> TOE: 3
+
+# <TAC> TAC: 2
+
+# <TOE> TOE: 3
+
 <TIC> TIC: 6
-#<TAC> TAC: 1
-#<TOE> TOE: 2
+
+# <TAC> TAC: 1
+
+# <TOE> TOE: 2
+
 <TOE> TOE: 1
+
 <TIC> TIC: 5
+
 <TIC> TIC: 4
+
 <TIC> TIC: 3
+
 <TIC> TIC: 2
+
 <TIC> TIC: 1
+
 Main Thread completata! tempo di esecuzione: 3754ms // questo 
+
 Toe viene dopo Tac:9 volte
 
 
