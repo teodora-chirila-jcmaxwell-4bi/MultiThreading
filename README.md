@@ -84,4 +84,4 @@ Main Thread completata! tempo di esecuzione: 3754ms //questa è una funzione in 
 Toe viene dopo Tac: 9 volte
 
 
-NB:Ogni volta che si complila il codice il risultato cambia quindi ci sono infinite soluzioni appunto perchè il tempo di sleep è casuale. Quele sopra sono 2 prove del codice da me fatto.
+NB:Ogni volta che si complila il codice il risultato cambia quindi ci sono infinite soluzioni appunto perchè il tempo di sleep è casuale. Quella sopra è una prova del codice da me fatto.
