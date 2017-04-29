@@ -14,7 +14,7 @@ Per verificare se TOE capita dopo TAC bisogna fare un confronto tra 2 varibili:
 - quella contenente il thread attuale.
 - quella contenente il thread subito precedente.
 Quindi se in nome contenente nella variabile attuale è "TAC" e il nome contenuto nella variabile precedente è "TOE" incrementare la variabile per il punteggio.
-# IL RISULTATO SARA' IL SEGUENTE SE IL CODICE E' CORRETTO: 
+## IL RISULTATO SARA' IL SEGUENTE SE IL CODICE E' CORRETTO: 
 (per vedere il corretto funzionamento basta contare quante volte toe capita dopo tac e vedere se combacia con il risultato della variabile del punteggio, come nelle immagini seguenti //parti evidenziate in giallo)
 
 
