@@ -1,21 +1,20 @@
 # TicTacToe
-Questo Branch e' usato per creare una discussione in classe riguardo l'esercizio TicTacToe compresi i concetti che sono legati al codice.
-
-Per la discussione ho creato una Pull Request "TicTacToe-4Binfo-2017".
-
-Vorrei che tutti partecipassero attivamente alla discussione.
+TicTacToe è un programma/progetto con lo scopo di prendere più confidenza con la multiprogrammazione e il linguaggio java.
 
 # Istruzioni
-Ognuno degli studenti deve: 
-1. Creare un Fork del mio progetto MutiThreading.
-2. Creare un Branch chiamato Esercizio 1.
-3. Fare le modifiche del codice per svolgere l'Esercizio 1.
-4. Per ogni modifica apportata introdurre un commento nel codice.
-5. Modificare README file aggiungere la descrizione del programma TicTacToe.
-6. Scrivere una pagina WIKI con l'elenco dei concetti imparati e la descrizione con proprie parole di ogni concetto.
-7. Verificare (testare) il codice che si e' modificato.
-8. Quando il codice funziona correttamente fare un MERGE (fusione) del Branch "Esercizio 1" con il Branch "master"
+Ci è stato richiesto di modificare il programma creato dal professore ed aggiungere delle funzionalità diverse:
+1. Modificare il nome della classe da TicTac a TicTacToe.
+2. Creare e avviare un terzo thread "TOE".
+3. Modificare il tempo di sleep di ciascun thread sostituendolo con uno generato casualmente.
+4. Contare quante volte il thread di nome "TOE" viene immediatamente dopo al thread di nome "TAC" con un'apposita variabile da incrementare.
 
-NOTA: Il testo dell'Esercizio 1 si trova nella WIKI di questo progetto.
+Una volta eseguite le modifiche si può dedurre lo scopo del programma. E cioè:
+Far partire tutti e 3 i thread contemporaneamente con un tempo di riposo casuale in modo da ottenere una sequenza dei thread diversa ad ogni compilazione del codice, ogni volta che il thread TOE capita subito dopo il thread TAC deve essere incrementata una variabile che conti il numero di volte che la condizione precedentemente detta è vera. Stamapare a video il contenuto della variabile.
+Per verificare se TOE capita dopo TAC bisogna fare un confronto tra 2 varibili:
+- quella contenente il thread attuale.
+- quella contenente il thread subito precedente.
+Quindi se in nome contenente nella variabile attuale è "TAC" e il nome contenuto nella variabile precedente è "TOE" incrementare la variabile per il punteggio.
+# IL RISULTATO SARA' IL SEGUENTE SE IL CODICE E' CORRETTO:
 
-# Buon Lavoro!
+
+NB:Ogni volta che si complila il codice il risultato cambia quindi ci sono infinite soluzioni appunto perchè il tempo di sleep è casuale. Quele sopra sono 2 prove del codice da me fatto.
