@@ -19,53 +19,53 @@ Quindi se in nome contenente nella variabile attuale è "TAC" e il nome contenut
 
 Main Thread iniziata...    
 
-# <TAC> TAC: 10
+<TAC> TAC: 10
 
-# <TOE> TOE: 10
+--><TOE> TOE: 10
 
 <TIC> TIC: 10
 
-# <TAC> TAC: 9
+<TAC> TAC: 9
 
-# <TOE> TOE: 9
+--><TOE> TOE: 9
 
-# <TAC> TAC: 8
+<TAC> TAC: 8
 
-# <TOE> TOE: 8
+--><TOE> TOE: 8
 
 <TIC> TIC: 9
 
-# <TAC> TAC: 7
+<TAC> TAC: 7
 
-# <TOE> TOE: 7
+--><TOE> TOE: 7
 
-# <TAC> TAC: 6
+<TAC> TAC: 6
 
-# <TOE> TOE: 6
+--><TOE> TOE: 6
 
 <TIC> TIC: 8
 
-# <TAC> TAC: 5
+<TAC> TAC: 5
 
-# <TOE> TOE: 5
+--><TOE> TOE: 5
 
-# <TAC> TAC: 4
+<TAC> TAC: 4
 
-# <TOE> TOE: 4
+--><TOE> TOE: 4
 
 <TIC> TIC: 7
 
 <TAC> TAC: 3
 
-# <TAC> TAC: 2
+<TAC> TAC: 2
 
-# <TOE> TOE: 3
+--><TOE> TOE: 3
 
 <TIC> TIC: 6
 
-# <TAC> TAC: 1
+<TAC> TAC: 1
 
-# <TOE> TOE: 2
+--><TOE> TOE: 2
 
 <TOE> TOE: 1
 
@@ -79,7 +79,7 @@ Main Thread iniziata...
 
 <TIC> TIC: 1
 
-Main Thread completata! tempo di esecuzione: 3754ms // questo 
+Main Thread completata! tempo di esecuzione: 3754ms //questa è una funzione in più che ci mostra il tempo di esecuzione, può essere tolta modificando il programma.
 
 Toe viene dopo Tac:9 volte
 
