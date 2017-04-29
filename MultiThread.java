@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @author Matteo Palitto
  */
 public class MultiThread {
-
+    
     /**
      * @param args the command line arguments
      */
@@ -26,25 +26,30 @@ public class MultiThread {
         long start = System.currentTimeMillis();
         
         // Posso creare un THREAD e avviarlo immediatamente
-        Thread tic = new Thread (new TicTac("TIC"));
-        tic.start();
+        Thread tic = new Thread (new TicTacToe("TIC"));
+        tic.start(); // avvio del primo THREAD
+        // Posso creare un secondo THREAD e avviarlo immediatamente
+        Thread tac = new Thread(new TicTacToe("TAC"));
+          tac.start();  // avvio del secondo THREAD
+           // Posso creare un terzo THREAD e avviarlo immediatamente
+        Thread toe = new Thread (new TicTacToe("TOE"));
+        toe.start(); // avvio del terzo THREAD
+         
+        try
+        {  tic.join(); } // metodo che viene richiamato su un thread specifico e ha lo scopo di mettere in attesa il thread attualmente in esecuzione fino a quando il thread su cui è stato invocato il metodo join() non termini
+        catch (InterruptedException exc){}
         
-        // Posso creare un 2ndo THREAD e farlo iniziare qualche tempo dopo...
-        Thread tac = new Thread(new TicTac("TAC"));
-        
-        try {
-            TimeUnit.MILLISECONDS.sleep(1111);
-            tac.start();  // avvio del secondo THREAD
-        } catch (InterruptedException e) {}
-        
-        try {
-            TimeUnit.MILLISECONDS.sleep(1234);
-        } catch (InterruptedException e) {}
-        tac.interrupt(); // stop 2nd THREAD
-
+        try
+        {  tac.join(); }
+        catch (InterruptedException exc){}
+         
+        try
+        { toe.join(); }
+        catch (InterruptedException exc){}
         
         long end = System.currentTimeMillis();
-        System.out.println("Main Thread completata! tempo di esecuzione: " + (end - start) + "ms");
+        System.out.println("Main Thread completata! tempo di esecuzione: " + (end - start) + "ms"); //stampa a video del tempo di esecuione del main
+        System.out.println("Toe viene dopo Tac:" + TicTacToe.punteggio + " volte"); //stampa a video del contenuto della variabile punteggio
     }
     
 }
@@ -53,14 +58,16 @@ public class MultiThread {
 // +1 si puo estendere da un altra classe
 // +1 si possono passare parametri (usando il Costruttore)
 // +1 si puo' controllare quando un THREAD inizia indipendentemente da quando e' stato creato
-class TicTac implements Runnable {
+class TicTacToe implements Runnable {
     
     // non essesndo "static" c'e' una copia delle seguenti variabili per ogni THREAD 
     private String t;
     private String msg;
-
+    public static int punteggio=0; //dichiarazione di una variabile statica che può essere condivisa da tutti e tre i thread che incrementeranno ogni volta che la condizione posta sarà soddisfatta.
+    public static String threadPrima = " "; //dichiarazione di una variabile statica che sarà condivisa da tutti e tre i thread. Essa conterrà i nome del thread che dovrà essere confrontata con il nome del thread attuale.
+    int random=100+(int)(Math.random()*300); //creazione di un numero random che va da 100 a 300
     // Costruttore, possiamo usare il costruttore per passare dei parametri al THREAD
-    public TicTac (String s) {
+    public TicTacToe (String s) {
         this.t = s;
     }
     
@@ -68,20 +75,27 @@ class TicTac implements Runnable {
     // se facessimo un overloading invece di un override il copilatore ci segnalerebbe l'errore
     // per approfondimenti http://lancill.blogspot.it/2012/11/annotations-override.html
     public void run() {
+        
         for (int i = 10; i > 0; i--) {
             msg = "<" + t + "> ";
             //System.out.print(msg);
             
             try {
-                TimeUnit.MILLISECONDS.sleep(400);
+                TimeUnit.MILLISECONDS.sleep(random); //utilizzato per rappresentare intervalli di tempo specificati in una determinata unità di misura(millisecondi nel nostro caso) e per la gestione di tempi di ritardo.
             } catch (InterruptedException e) {
                 System.out.println("THREAD " + t + " e' stata interrotta! bye bye...");
                 return; //me ne vado = termino il THREAD
             }
             msg += t + ": " + i;
             System.out.println(msg);
-         
+          
+            if(threadPrima.equals("TAC") && t.equals("TOE")) //condizione della quale si mettono a confronto il nome del thread attuale con quello subito precedente a lui.
+            {punteggio++;} //incremento della variabile statica punteggio;
+            threadPrima=t; // assegnazione del thread attuale a quello precedente;
         }
+           
+            
     }
+    
     
 }

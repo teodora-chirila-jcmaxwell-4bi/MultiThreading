@@ -1,62 +1,87 @@
-# MultiThreading
-JAVA Mutithreading per le classi 4te
+# TicTacToe
+TicTacToe è un programma/progetto con lo scopo di prendere più confidenza con la multiprogrammazione e il linguaggio java.
 
-Con questo progetto vorrei introdurre gli allievi delle 4te ai concetti di Programmazione Concorrente
+# Istruzioni
+Ci è stato richiesto di modificare il programma creato dal professore ed aggiungere delle funzionalità diverse:
+1. Modificare il nome della classe da TicTac a TicTacToe.
+2. Creare e avviare un terzo thread "TOE".
+3. Modificare il tempo di sleep di ciascun thread sostituendolo con uno generato casualmente.
+4. Contare quante volte il thread di nome "TOE" viene immediatamente dopo al thread di nome "TAC" con un'apposita variabile da incrementare.
 
-## Cos'e' la con-correnza?
-e' il verificarsi di eventi allo stesso tempo (contemporaneamente)
+Una volta eseguite le modifiche si può dedurre lo scopo del programma. E cioè:
+Far partire tutti e 3 i thread contemporaneamente con un tempo di riposo casuale in modo da ottenere una sequenza dei thread diversa ad ogni compilazione del codice, ogni volta che il thread TOE capita subito dopo il thread TAC deve essere incrementata una variabile che conti il numero di volte che la condizione precedentemente detta è vera. Stamapare a video il contenuto della variabile. (I thread fanno un countdown da 10 a 1. Arrivati a 1 si fermano)
+Per verificare se TOE capita dopo TAC bisogna fare un confronto tra 2 varibili:
+- quella contenente il thread attuale.
+- quella contenente il thread subito precedente.
+Quindi se in nome contenente nella variabile attuale è "TAC" e il nome contenuto nella variabile precedente è "TOE" incrementare la variabile per il punteggio.
+## IL RISULTATO SARA' IL SEGUENTE SE IL CODICE E' CORRETTO: 
+(per vedere il corretto funzionamento basta contare quante volte toe capita dopo tac e vedere se combacia con il risultato della variabile del punteggio, come nelle righe seguenti //parti inndicate dalla freccia)
 
-Pensiamo alla vita delle persone:
-* piu' persone vivono nello stesso giorno
-* ogni persona puo' fare piu' cose allo stesso tempo (es. studiare, ascoltare musica e giocare ad un videogioco...)
-* in un bar affollato ci sono diversi baristi per smaltire la folla che vuole il caffe'
-* mentre un ufficio svolge una pratica un altro ufficio ne svolge un'altra (non in Italia... dove nessun ufficio svolge qualcosa)
+Main Thread iniziata...    
 
-I sistemi informatici che sono uno strumento umano, e che si interfacciano con l'umanita' sono progettati per poter fare piu' di una cosa contemporaneamente.
+<TAC> TAC: 10
 
-In questo modo lo stesso utente puo' fare piu' cose al computer contemporaneamente (es. leggere email, ascoltare musica online, stampare documento) e piu' persone possono accedere allo stesso programma (facebook, mail, registro elettronico...)
+--><TOE> TOE: 10
 
-Supponiamo che piu' utenti debbano usare il registro elettronico, se il programma fosse progettatto senza usare la programmazione concorrenziale (multithreading), solo un utente alla volta sarebbe in grado di accedervi.
+<TIC> TIC: 10
 
-Molto tempo e' usato dall'utente per inserire i dati o leggerli, e in quel tempo il programma non esegue nessun codice, non utilizzando (sprecando) la potenza di calcolo del computer in uso.
+<TAC> TAC: 9
 
-Se piu' utenti potessero accedere al registro di classe contemporaneamente, il computer, in attesa che un utente compia una certa azione, potrebbe eseguire il codice per soddisfare la richiesta di un altro utente.
+--><TOE> TOE: 9
 
-In generale la Programmazione Concorrente porta ad un utilizzo piu' intelligente ed efficiente dello strumento informatico.
+<TAC> TAC: 8
 
-## Processo
-e' un programma (flusso di istruzioni e dati) indipendente da un altro programma con cui non condividono nulla ...tranne la CPU
+--><TOE> TOE: 8
 
-esempio: un programma di calcolo e un videogioco
+<TIC> TIC: 9
 
-uno strumento informatico che permette a piu' processi di essere in esecuzione contemporaneamete e' detto multi-processing
+<TAC> TAC: 7
 
-## Thread
-e' una porzione di un programma che viene eseguito contemporaneamente ad altre porzioni dello stesso programma. 
+--><TOE> TOE: 7
 
-Spesso THREADs comunicano, condividono risorse, collaborano e hanno parte di codice in comune.
+<TAC> TAC: 6
 
-esempio: il registro elettronico che permette a piu' utenti di accedervi contemporaneamente
+--><TOE> TOE: 6
 
-uno strumento informatico che permette a piu' processi di essere in esecuzione contemoporaneamete e' detto multi-threading
+<TIC> TIC: 8
+
+<TAC> TAC: 5
+
+--><TOE> TOE: 5
+
+<TAC> TAC: 4
+
+--><TOE> TOE: 4
+
+<TIC> TIC: 7
+
+<TAC> TAC: 3
+
+<TAC> TAC: 2
+
+--><TOE> TOE: 3
+
+<TIC> TIC: 6
+
+<TAC> TAC: 1
+
+--><TOE> TOE: 2
+
+<TOE> TOE: 1
+
+<TIC> TIC: 5
+
+<TIC> TIC: 4
+
+<TIC> TIC: 3
+
+<TIC> TIC: 2
+
+<TIC> TIC: 1
+
+Main Thread completata! tempo di esecuzione: 3754ms //questa è una funzione in più che ci mostra il tempo di esecuzione, può essere tolta modificando il programma.
+
+Toe viene dopo Tac: 9 volte
 
 
-## Al fine di presentare i concetti di mutithreading in JAVA usero' due esempi
-
-1. Multithread.java che vuole illustrare i seguenti concetti base:
- * 1. MAIN e' un thread come gli altri e quindi puo' terminare prima che gli altri
- * 2. Piu' THREADs vengono eseguiti allo stesso tempo
- * 3. THREADs possono essere interrotti e hanno la possibilita' di interrompersi in modo pulito
- * 4. THREADs possono essere definiti mediante una CLASSE che implementa un'INTERFACCIA Runnable
- * 5. THREADs possono essere avviati in modo indipendente da quando sono stati definiti
- * 6. posso passare parametri al THREADs tramite il costruttore della classe Runnable
-
-2. FilosofiACena.java (Filosofi a cena) che vuole illustrare i seguenti concetti di comunicazione tra THREADs e condivisione di risorse:
- * 0. THREADs comunicano condividendo variabili
- * 1. MONITOR gestiscono attività di coordinamento e di accesso alle variabili tra più THREADs. 
- * 2. Le variabili dell'OGGETTO MONITOR sono le risorse da condividere tra THREADs
- * 3. Le attivita' CRITICHE che vengono fatte sulle variabili del MONITOR sono i metodi SINCRONIZZATI della classe MONITOR
- * 4. i THREADs ricevono il puntatore all'OGGETTO MONITOR e ne usano i metodi per accedere alle risorse
- * 5. la parola SYNCHRONIZED chiude l'accesso agli altri THREADs che vogliono usare la stessa risorsa (competizione)
- * 6. WAIT e' usato per mettere in attesa i THREADs che vogliono usare una risorsa OCCUPATA (collaborazione)
- * 7. NOTIFY[ALL] e' usato per comunicare ai THREADs quando la risorsa e' di nuovo disponibile (collaborazione)
+NB:Ogni volta che si complila il codice il risultato cambia quindi ci sono infinite soluzioni appunto perchè il tempo di sleep è casuale. Quella sopra è una prova del codice da me fatto.
