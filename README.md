@@ -15,7 +15,41 @@ Per verificare se TOE capita dopo TAC bisogna fare un confronto tra 2 varibili:
 - quella contenente il thread subito precedente.
 Quindi se in nome contenente nella variabile attuale è "TAC" e il nome contenuto nella variabile precedente è "TOE" incrementare la variabile per il punteggio.
 ## IL RISULTATO SARA' IL SEGUENTE SE IL CODICE E' CORRETTO: 
-(per vedere il corretto funzionamento basta contare quante volte toe capita dopo tac e vedere se combacia con il risultato della variabile del punteggio, come nelle immagini seguenti //parti evidenziate in giallo)
+(per vedere il corretto funzionamento basta contare quante volte toe capita dopo tac e vedere se combacia con il risultato della variabile del punteggio, come nelle immagini seguenti //parti in grassetto)
+
+Main Thread iniziata...                                                           
+#<TAC> TAC: 10
+#<TOE> TOE: 10
+<TIC> TIC: 10
+#<TAC> TAC: 9
+#<TOE> TOE: 9
+#<TAC> TAC: 8
+#<TOE> TOE: 8
+<TIC> TIC: 9
+#<TAC> TAC: 7
+#<TOE> TOE: 7
+#<TAC> TAC: 6
+#<TOE> TOE: 6
+<TIC> TIC: 8
+#<TAC> TAC: 5
+#<TOE> TOE: 5
+#<TAC> TAC: 4
+#<TOE> TOE: 4
+<TIC> TIC: 7
+<TAC> TAC: 3
+#<TAC> TAC: 2
+#<TOE> TOE: 3
+<TIC> TIC: 6
+#<TAC> TAC: 1
+#<TOE> TOE: 2
+<TOE> TOE: 1
+<TIC> TIC: 5
+<TIC> TIC: 4
+<TIC> TIC: 3
+<TIC> TIC: 2
+<TIC> TIC: 1
+Main Thread completata! tempo di esecuzione: 3754ms // questo 
+Toe viene dopo Tac:9 volte
 
 
 NB:Ogni volta che si complila il codice il risultato cambia quindi ci sono infinite soluzioni appunto perchè il tempo di sleep è casuale. Quele sopra sono 2 prove del codice da me fatto.
