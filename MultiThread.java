@@ -28,15 +28,15 @@ public class MultiThread {
         // Posso creare un THREAD e avviarlo immediatamente
         Thread tic = new Thread (new TicTacToe("TIC"));
         tic.start(); // avvio del primo THREAD
-        // Posso creare un 2ndo THREAD e avviarlo immediatamente
+        // Posso creare un secondo THREAD e avviarlo immediatamente
         Thread tac = new Thread(new TicTacToe("TAC"));
           tac.start();  // avvio del secondo THREAD
-           // Posso creare un 2ndo THREAD e avviarlo immediatamente
+           // Posso creare un terzo THREAD e avviarlo immediatamente
         Thread toe = new Thread (new TicTacToe("TOE"));
         toe.start(); // avvio del terzo THREAD
          
         try
-        {  tic.join(); }
+        {  tic.join(); } // metodo che viene richiamato su un thread specifico e ha lo scopo di mettere in attesa il thread attualmente in esecuzione fino a quando il thread su cui è stato invocato il metodo join() non termini
         catch (InterruptedException exc){}
         
         try
@@ -48,8 +48,8 @@ public class MultiThread {
         catch (InterruptedException exc){}
         
         long end = System.currentTimeMillis();
-        System.out.println("Main Thread completata! tempo di esecuzione: " + (end - start) + "ms");
-        System.out.println("Toe viene dopo Tac:" + TicTacToe.punteggio + " volte");
+        System.out.println("Main Thread completata! tempo di esecuzione: " + (end - start) + "ms"); //stampa a video del tempo di esecuione del main
+        System.out.println("Toe viene dopo Tac:" + TicTacToe.punteggio + " volte"); //stampa a video del contenuto della variabile punteggio
     }
     
 }
