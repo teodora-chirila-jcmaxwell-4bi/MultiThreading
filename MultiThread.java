@@ -1,101 +1,103 @@
 /*
- * Con questo programma voglio illustrare i seguenti concetti:
- * 1. MAIN e' un thread come gli altri e quindi puo' terminare prima che gli altri
- * 2. THREADs vengono eseguiti allo stesso tempo
- * 3. THREADs possono essere interrotti e hanno la possibilita' di interrompersi in modo pulito
- * 4. THREADs possono essere definiti mediante una CLASSE che implementa un INTERFACCIA Runnable
- * 5. THREADs possono essere avviati in modo indipendente da quando sono stati definiti
- * 6. posso passare parametri al THREADs tramite il costruttore della classe Runnable
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package multithread;
-
+package tictactoe;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
- * @author Matteo Palitto
+ * @author teodora.chirila
  */
-public class MultiThread {
-    
+public class TicTacToe {
+
     /**
      * @param args the command line arguments
      */
-    // "main" e' il THREAD principale da cui vengono creati e avviati tutti gli altri THREADs
-    // i vari THREADs poi evolvono indipendentemente dal "main" che puo' eventualmente terminare prima degli altri
     public static void main(String[] args) {
-        System.out.println("Main Thread iniziata...");
-        long start = System.currentTimeMillis();
+     System.out.println("Main Thread iniziata...");
+        Schermi schermo = new Schermi(); //creazione di un nuovo oggetto di nome schermo di tipo schermi (monitor)
         
         // Posso creare un THREAD e avviarlo immediatamente
-        Thread tic = new Thread (new TicTacToe("TIC"));
-        tic.start(); // avvio del primo THREAD
-        // Posso creare un secondo THREAD e avviarlo immediatamente
-        Thread tac = new Thread(new TicTacToe("TAC"));
-          tac.start();  // avvio del secondo THREAD
-           // Posso creare un terzo THREAD e avviarlo immediatamente
-        Thread toe = new Thread (new TicTacToe("TOE"));
-        toe.start(); // avvio del terzo THREAD
-         
-        try
-        {  tic.join(); } // metodo che viene richiamato su un thread specifico e ha lo scopo di mettere in attesa il thread attualmente in esecuzione fino a quando il thread su cui è stato invocato il metodo join() non termini
-        catch (InterruptedException exc){}
+        Thread tic = new Thread (new TXY("TIC", schermo));
+        tic.start();
+        Thread tac = new Thread (new TXY("TAC", schermo));
+        tac.start();
+        Thread toe = new Thread (new TXY("TOE", schermo));
+        toe.start();
         
-        try
-        {  tac.join(); }
-        catch (InterruptedException exc){}
-         
-        try
-        { toe.join(); }
-        catch (InterruptedException exc){}
-        
-        long end = System.currentTimeMillis();
-        System.out.println("Main Thread completata! tempo di esecuzione: " + (end - start) + "ms"); //stampa a video del tempo di esecuione del main
-        System.out.println("Toe viene dopo Tac:" + TicTacToe.punteggio + " volte"); //stampa a video del contenuto della variabile punteggio
+        try {
+            toe.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         try {
+            tic.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          try {
+            tac.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Main THREAD terminata. Punteggio: " + schermo.punteggio());
     }
     
+}
+
+
+class Schermi { //Schermi è la nostra classe monitor che ci aiuterà a gestire "i movimenti" del thread, (simile a un semaforo) il che significa che solo un thread può "entrare" in un monitor in un determinato istante.
+
+  String threadPrima = ""; // ultimo thread che ha scritto sullo schermo
+  int punteggio = 0; //variabile che conta quante volte toe viene dopo di tac
+
+  public int punteggio() {  // fornisce il punteggio
+    return this.punteggio;
+  }
+
+  public synchronized void scrivi(String thread, String msg) { //parola chiave synchronized applicata al metodo scrivi per gestire la sincronizzazione dei thred e far in modo che uesti non vadano in conflitto dato che Solo un thread alla volta può eseguire un metodo synchronized su uno stesso oggetto
+    int random=100+(int)(Math.random()*300); //numero casuale tra 100 e 300
+    msg += ": " + random + " :";
+    if( thread.equals("TOE") && threadPrima.equals("TAC")) { //confronto tra il thread attuale e quello precedente, se quello attuale corrisponde a TOE e quello precendete a TAC si incrementa il punteggiio nella riga successiva.
+        punteggio++; //incremento del punteggio se la condizione prima risulta vera
+        msg += "  <---------------- qui"; // messaggio che mostra dove effettivamente toe è capitato dopo tac
+    }
+    try {
+        TimeUnit.MILLISECONDS.sleep(random); //random ora diventa un numero rappresentante il tempo(generato casualmente dall'istruzione precedente) il MILLISECONDI 
+    } catch (InterruptedException e) {} //Richiamo eccezione    this.ultimoTHREAD = thread;
+    System.out.println(msg); //stampa del messaggio "<-------qui"
+    threadPrima = thread; // ogni volta che un thread scrive cambia il contenuto delle variabili "threadPrima" e "thread" nella variabile "threadPrima" ci va l'ultimo thread che aveva scritto e quello nuovo va nella variabile "Thread" e cosi via 
+  }
 }
 
 // Ci sono vari (troppi) metodi per creare un THREAD in Java questo e' il mio preferito per i vantaggi che offre
 // +1 si puo estendere da un altra classe
 // +1 si possono passare parametri (usando il Costruttore)
 // +1 si puo' controllare quando un THREAD inizia indipendentemente da quando e' stato creato
-class TicTacToe implements Runnable {
+class TXY implements Runnable {
     
     // non essesndo "static" c'e' una copia delle seguenti variabili per ogni THREAD 
     private String t;
     private String msg;
-    public static int punteggio=0; //dichiarazione di una variabile statica che può essere condivisa da tutti e tre i thread che incrementeranno ogni volta che la condizione posta sarà soddisfatta.
-    public static String threadPrima = " "; //dichiarazione di una variabile statica che sarà condivisa da tutti e tre i thread. Essa conterrà i nome del thread che dovrà essere confrontata con il nome del thread attuale.
-    int random=100+(int)(Math.random()*300); //creazione di un numero random che va da 100 a 300
+    Schermi schermo;
+
     // Costruttore, possiamo usare il costruttore per passare dei parametri al THREAD
-    public TicTacToe (String s) {
+    public TXY (String s, Schermi schermo) {
         this.t = s;
+        this.schermo = schermo;
     }
     
     @Override // Annotazione per il compilatore
     // se facessimo un overloading invece di un override il copilatore ci segnalerebbe l'errore
     // per approfondimenti http://lancill.blogspot.it/2012/11/annotations-override.html
-    public void run() {
-        
+    public void run() { //metodo eseguito dai thread che in questo caso faranno un contdown partendo da 10
         for (int i = 10; i > 0; i--) {
-            msg = "<" + t + "> ";
-            //System.out.print(msg);
-            
-            try {
-                TimeUnit.MILLISECONDS.sleep(random); //utilizzato per rappresentare intervalli di tempo specificati in una determinata unità di misura(millisecondi nel nostro caso) e per la gestione di tempi di ritardo.
-            } catch (InterruptedException e) {
-                System.out.println("THREAD " + t + " e' stata interrotta! bye bye...");
-                return; //me ne vado = termino il THREAD
-            }
-            msg += t + ": " + i;
-            System.out.println(msg);
-          
-            if(threadPrima.equals("TAC") && t.equals("TOE")) //condizione della quale si mettono a confronto il nome del thread attuale con quello subito precedente a lui.
-            {punteggio++;} //incremento della variabile statica punteggio;
-            threadPrima=t; // assegnazione del thread attuale a quello precedente;
+            msg = "<" + t + "> " + t + ": " + i;
+            schermo.scrivi(t, msg); //richiamo della procedura scrivi che si trova nella classe schermi
         }
-           
-            
     }
-    
     
 }
