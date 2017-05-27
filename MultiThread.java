@@ -59,14 +59,14 @@ class Schermi { //Schermi è la nostra classe monitor che ci aiuterà a gestire 
   }
 
   public synchronized void scrivi(String thread, String msg) { //parola chiave synchronized applicata al metodo scrivi per gestire la sincronizzazione dei thred e far in modo che uesti non vadano in conflitto dato che Solo un thread alla volta può eseguire un metodo synchronized su uno stesso oggetto
-    int random=100+(int)(Math.random()*300); //numero casuale tra 100 e 400
+    int random=100+(int)(Math.random()*300); //numero casuale tra 100 e 300
     msg += ": " + random + " :";
     if( thread.equals("TOE") && threadPrima.equals("TAC")) { //confronto tra il thread attuale e quello precedente, se quello attuale corrisponde a TOE e quello precendete a TAC si incrementa il punteggiio nella riga successiva.
         punteggio++; //incremento del punteggio se la condizione prima risulta vera
         msg += "  <---------------- qui"; // messaggio che mostra dove effettivamente toe è capitato dopo tac
     }
     try {
-        TimeUnit.MILLISECONDS.sleep(random); //casuale ora diventa un numero rappresentante il tempo il MILLISECONDI 
+        TimeUnit.MILLISECONDS.sleep(random); //random ora diventa un numero rappresentante il tempo(generato casualmente dall'istruzione precedente) il MILLISECONDI 
     } catch (InterruptedException e) {} //Richiamo eccezione    this.ultimoTHREAD = thread;
     System.out.println(msg); //stampa del messaggio "<-------qui"
     threadPrima = thread; // ogni volta che un thread scrive cambia il contenuto delle variabili "threadPrima" e "thread" nella variabile "threadPrima" ci va l'ultimo thread che aveva scritto e quello nuovo va nella variabile "Thread" e cosi via 
