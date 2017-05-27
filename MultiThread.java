@@ -18,7 +18,7 @@ public class TicTacToe {
      */
     public static void main(String[] args) {
      System.out.println("Main Thread iniziata...");
-        Schermi schermo = new Schermi();
+        Schermi schermo = new Schermi(); //creazione di un nuovo oggetto di nome schermo di tipo schermi (monitor)
         
         // Posso creare un THREAD e avviarlo immediatamente
         Thread tic = new Thread (new TXY("TIC", schermo));
@@ -49,27 +49,27 @@ public class TicTacToe {
 }
 
 
-class Schermi {
+class Schermi { //Schermi è la nostra classe monitor che ci aiuterà a gestire "i movimenti" del thread, (simile a un semaforo) il che significa che solo un thread può "entrare" in un monitor in un determinato istante.
 
   String threadPrima = ""; // ultimo thread che ha scritto sullo schermo
-  int punteggio = 0;
+  int punteggio = 0; //variabile che conta quante volte toe viene dopo di tac
 
   public int punteggio() {  // fornisce il punteggio
     return this.punteggio;
   }
 
-  public synchronized void scrivi(String thread, String msg) {
+  public synchronized void scrivi(String thread, String msg) { //parola chiave synchronized applicata al metodo scrivi per gestire la sincronizzazione dei thred e far in modo che uesti non vadano in conflitto dato che Solo un thread alla volta può eseguire un metodo synchronized su uno stesso oggetto
     int random=100+(int)(Math.random()*300); //numero casuale tra 100 e 400
     msg += ": " + random + " :";
-    if( thread.equals("TOE") && threadPrima.equals("TAC")) {
-        punteggio++;
-        msg += "  <---------------- qui";
+    if( thread.equals("TOE") && threadPrima.equals("TAC")) { //confronto tra il thread attuale e quello precedente, se quello attuale corrisponde a TOE e quello precendete a TAC si incrementa il punteggiio nella riga successiva.
+        punteggio++; //incremento del punteggio se la condizione prima risulta vera
+        msg += "  <---------------- qui"; // messaggio che mostra dove effettivamente toe è capitato dopo tac
     }
     try {
-        TimeUnit.MILLISECONDS.sleep(random); //casuale ora diventa un numero rappresentante il tempo il MILLISECONDI
+        TimeUnit.MILLISECONDS.sleep(random); //casuale ora diventa un numero rappresentante il tempo il MILLISECONDI 
     } catch (InterruptedException e) {} //Richiamo eccezione    this.ultimoTHREAD = thread;
-    System.out.println(msg);
-    threadPrima = thread;
+    System.out.println(msg); //stampa del messaggio "<-------qui"
+    threadPrima = thread; // ogni volta che un thread scrive cambia il contenuto delle variabili "threadPrima" e "thread" nella variabile "threadPrima" ci va l'ultimo thread che aveva scritto e quello nuovo va nella variabile "Thread" e cosi via 
   }
 }
 
@@ -93,10 +93,10 @@ class TXY implements Runnable {
     @Override // Annotazione per il compilatore
     // se facessimo un overloading invece di un override il copilatore ci segnalerebbe l'errore
     // per approfondimenti http://lancill.blogspot.it/2012/11/annotations-override.html
-    public void run() {
+    public void run() { //metodo eseguito dai thread che in questo caso faranno un contdown partendo da 10
         for (int i = 10; i > 0; i--) {
             msg = "<" + t + "> " + t + ": " + i;
-            schermo.scrivi(t, msg);
+            schermo.scrivi(t, msg); //richiamo della procedura scrivi che si trova nella classe schermi
         }
     }
     
